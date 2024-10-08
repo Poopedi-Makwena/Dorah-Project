@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script>document.addEventListener("DOMContentLoaded", () => {
+        fetchWorkExperience();
+    });
+    
+    function fetchWorkExperience() {
+        fetch("fetch.php?table=WorkExperience")
+            .then(response => response.json())
+            .then(data => {
+                const experienceContainer = document.getElementById("experience-list");
+                experienceContainer.innerHTML = ""; // Clear previous content
+    
+                data.forEach(exp => {
+                    const expDiv = document.createElement("div");
+                    expDiv.classList.add("work-experience");
+    
+                    expDiv.innerHTML = `
+                        <h3>${exp.job_title} at ${exp.company}</h3>
+                        <p><strong>From:</strong> ${exp.start_date} <strong>To:</strong> ${exp.end_date}</p>
+                        <p>${exp.responsibilities}</p>
+                    `;
+                    
+                    experienceContainer.appendChild(expDiv);
+                });
+            })
+            .catch(error => console.error("Error fetching work experience:", error));
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Work Experience</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="personal info.html">Personal Information</a></li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="work experience.html">Work Experience</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contact.html">Contact me</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h1>Company Name: Blue Technologist</h1>
+            <h2>Duration: 11/2023 - Present</h2>
+            <h3>Responsibilities</h3>
+            <p>Use html, CSS and Javascript to create portfolio websites</p>
+            <p>Manage company database</p>
+            <p>Collaborating with colleagues to run, test and debug codes</p>
+            <p>Help enduser with the use of company applications</p>
+            <p>Provide technical support to company employees</p>
+      
+          </main>
+          <main>
+        <h1>References</h1>
+        <p>Contact Person - Mr Ramasha S.E</p>
+        <p>Position - Company director<p>
+        <p>Contact No - 015 297 2380</p>
+        <p>Email - Ramashase@Bluetech.co.za</p>
+          </main>
+          <main>
+            <section id="experience-list">
+            
+            </section>
+          <footer>
+              <p>&copy; 2024 My Curriculum Vitae</p>
+          </footer>
+      </body>
+      </html>     

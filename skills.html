@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <script>document.addEventListener("DOMContentLoaded", () => {
+        const skillForm = document.getElementById("skill-form");
+    
+        skillForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+    
+            const formData = new FormData(skillForm);
+            fetch("insert.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                skillForm.reset();
+                fetchSkills(); // Refresh the skills list
+            })
+            .catch(error => console.error("Error adding skill:", error));
+        });
+    });
+    
+    function fetchSkills() {
+        fetch("fetch.php?table=Skills")
+            .then(response => response.json())
+            .then(data => {
+                const skillList = document.getElementById("skills-list");
+                skillList.innerHTML = ""; // Clear previous content
+    
+                data.forEach(skill => {
+                    const skillDiv = document.createElement("div");
+                    skillDiv.classList.add("skill");
+    
+                    skillDiv.innerHTML = `
+                        <h3>${skill.skill_name}</h3>
+                        <p>Proficiency Level: ${skill.proficiency_level}</p>
+                    `;
+    
+                    skillList.appendChild(skillDiv);
+                });
+            })
+            .catch(error => console.error("Error fetching skills:", error));
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname.split("/").pop();
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPath) {
+            link.classList.add("active");
+        }
+    });
+});
+
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Skills</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="personal info.html">Personal Information</a></li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="work experience.html">Work Experience</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="contact.html">Contact me</a></li>
+            </ul>
+        </nav>
+        <main>
+       <h1>SKILLS</h1>
+       <p>MS Office Suite</p>
+       <p>Frontend (HTML, CSS & Javascript)</p>
+       <p>Backend (PHP)</p>
+       <p>Python</p>
+       <p>Ruby</p>
+       <p>Database (SQL, NO SQL)</p>
+
+          </main>
+          <section>
+            <h2>Add a New Skill</h2>
+            <form id="skill-form">
+                <label for="skill_name">Skill:</label>
+                <input type="text" id="skill_name" name="skill_name" required>
+                <label for="proficiency_level">Proficiency Level (1-10):</label>
+                <input type="number" id="proficiency_level" name="proficiency_level" min="1" max="10" required>
+                <input type="hidden" name="table" value="Skills">
+                <button type="submit">Add Skill</button>
+            </form>
+        </section>
+          <footer>
+              <p>&copy; 2024 My Curriculum Vitae</p>
+          </footer>
+      </body>
+      </html>     
