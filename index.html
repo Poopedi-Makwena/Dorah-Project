@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Home</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <script>document.addEventListener("DOMContentLoaded", () => {
+        const toggleButton = document.getElementById("toggle-button");
+        const navMenu = document.querySelector("nav ul");
+    
+        toggleButton.addEventListener("click", () => {
+            navMenu.classList.toggle("visible");
+        });
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>My Curriculum Vitae</h1>
+        <button id="toggle-button">☰</button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="./PAGES/personal info.html">Personal Information</a></li>
+                <li><a href="./PAGES/education.html">Education</a></li>
+                <li><a href="./PAGES/work experience.html">Work Experience</a></li>
+                <li><a href="./PAGES/skills.html">Skills</a></li>
+                <li><a href="./PAGES/project.html">Projects</a></li>
+                <li><a href="./PAGES/contact.html">Contact me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Welcome to my CV website!</h2>
+        <p>Use the navigation bar to explore different sections.</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Curriculum Vitae</p>
+    </footer>
+</body>
+</html>
